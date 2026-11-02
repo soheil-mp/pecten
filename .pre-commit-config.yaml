@@ -35,7 +35,7 @@ repos:
     rev: v2.4.3
     hooks:
       - id: codespell
-        args: ["--ignore-words-list=ser,crate,ue,te"]
+        args: ["--ignore-words-list=ser,crate,ue,te,tung,vas"]
 
   - repo: https://github.com/DavidAnson/markdownlint-cli2
     rev: v0.24.0
