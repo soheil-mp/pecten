@@ -1,0 +1,204 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  merge_group:
+  workflow_dispatch:
+
+# Every job starts read-only; jobs ask for more only when they need it.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: "0"
+  UV_LOCKED: "1"
+
+jobs:
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      rust: ${{ steps.filter.outputs.rust }}
+      python: ${{ steps.filter.outputs.python }}
+      proto: ${{ steps.filter.outputs.proto }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        id: filter
+        with:
+          filters: |
+            rust:
+              - "crates/**"
+              - "Cargo.toml"
+              - "Cargo.lock"
+              - "rust-toolchain.toml"
+              - "rustfmt.toml"
+              - "deny.toml"
+              - ".config/nextest.toml"
+              - ".github/workflows/ci.yml"
+            python:
+              - "packages/**"
+              - "tools/**"
+              - "pyproject.toml"
+              - "uv.lock"
+              - ".python-version"
+              - ".github/workflows/ci.yml"
+            proto:
+              - "proto/**"
+              - "buf.yaml"
+              - "buf.gen.yaml"
+
+  hooks:
+    name: Hooks and secret scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+      - name: Run pre-commit hooks
+        # The language jobs below run these checks with their own caches.
+        env:
+          SKIP: mypy,import-linter,cargo-fmt,cargo-clippy
+        run: uv run pre-commit run --all-files --show-diff-on-failure
+      - name: Scan the full Git history for secrets
+        run: >-
+          docker run --rm -v "$PWD:/repo:ro" ghcr.io/gitleaks/gitleaks:v8.30.1
+          git /repo --redact --verbose --no-banner
+
+  rust:
+    name: Rust (${{ matrix.runner }})
+    needs: changes
+    if: needs.changes.outputs.rust == 'true'
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install the toolchain from rust-toolchain.toml
+        uses: actions-rust-lang/setup-rust-toolchain@a188e68d0fd2bd36ad51dccb2b07ba6e75105f30 # v2.0.1
+        with:
+          cache-on-failure: true
+      - uses: taiki-e/install-action@682ce6c3c696a4cd5168a05f98e51aa02b877941 # v2.89.1
+        with:
+          tool: cargo-nextest,cargo-llvm-cov
+      - name: rustfmt
+        if: matrix.runner == 'ubuntu-24.04'
+        run: cargo fmt --all -- --check
+      - name: Clippy
+        if: matrix.runner == 'ubuntu-24.04'
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: Tests with coverage
+        if: matrix.runner == 'ubuntu-24.04'
+        run: |
+          cargo llvm-cov nextest --workspace --locked --profile ci
+          {
+            echo "### Rust coverage"
+            echo '```text'
+            cargo llvm-cov report --summary-only
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Tests (arm64)
+        if: matrix.runner == 'ubuntu-24.04-arm'
+        run: cargo nextest run --workspace --locked --profile ci
+      - name: Build the Python extension crate
+        run: cargo build -p pecten-py --locked
+
+  python:
+    name: Python
+    needs: changes
+    if: needs.changes.outputs.python == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Install the workspace
+        run: uv sync --all-packages
+      - name: Ruff
+        run: |
+          uv run ruff format --check .
+          uv run ruff check --output-format=github .
+      - name: mypy (strict)
+        run: uv run mypy
+      - name: import-linter
+        run: uv run lint-imports
+      - name: Tests with coverage
+        run: |
+          uv run pytest --cov --cov-report=term
+          {
+            echo "### Python coverage"
+            uv run coverage report --format=markdown
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  proto:
+    name: Protobuf
+    needs: changes
+    if: needs.changes.outputs.proto == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: bufbuild/buf-action@85aebf73123b5c15fd5528aaecbf9129cddf7fa7 # v1.6.0
+        with:
+          lint: true
+          format: true
+          breaking: ${{ github.event_name == 'pull_request' }}
+          breaking_against: ${{ github.event.repository.clone_url }}#branch=main
+          push: false
+
+  ci-passed:
+    name: CI passed
+    if: always()
+    needs: [changes, hooks, rust, python, proto]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Require every job to pass or be skipped
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Job results: $RESULTS"
+          for result in $RESULTS; do
+            case "$result" in
+              success|skipped) ;;
+              *) echo "A required job ended with '$result'." >&2; exit 1 ;;
+            esac
+          done
