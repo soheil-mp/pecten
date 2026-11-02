@@ -1,0 +1,129 @@
+# Workspace root. It is not a package itself; members live in packages/*.
+[project]
+name = "pecten-workspace"
+version = "0.0.0"
+description = "Workspace root for Pecten's Python packages."
+requires-python = ">=3.14"
+dependencies = [
+  "pecten-api",
+  "pecten-contracts",
+  "pecten-ingest",
+  "pecten-pipelines",
+  "pecten-sim",
+  "pecten-survey",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+pecten-api = { workspace = true }
+pecten-contracts = { workspace = true }
+pecten-ingest = { workspace = true }
+pecten-pipelines = { workspace = true }
+pecten-sim = { workspace = true }
+pecten-survey = { workspace = true }
+
+# --- Ruff -------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+src = ["packages/*/src", "packages/*/tests", "tools"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "COM812", # conflicts with the formatter
+  "CPY001", # licence headers are not used; the licence is in LICENSE
+  "D203",   # use D211: no blank line before a class docstring
+  "D213",   # use D212: summary on the first docstring line
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = [
+  "D",       # test names describe the behaviour
+  "INP001",  # test directories are not packages
+  "PLR2004", # literal values are the point of a test
+  "S101",    # assert is how pytest works
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# --- mypy -------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.14"
+strict = true
+files = ["packages"]
+warn_unreachable = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+
+# --- pytest and coverage -------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "9.0"
+testpaths = ["packages"]
+addopts = ["-ra", "--strict-markers", "--strict-config", "--import-mode=importlib"]
+xfail_strict = true
+filterwarnings = ["error"]
+
+[tool.coverage.run]
+branch = true
+source_pkgs = [
+  "pecten_api",
+  "pecten_contracts",
+  "pecten_ingest",
+  "pecten_pipelines",
+  "pecten_sim",
+  "pecten_survey",
+]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = true
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError", "@overload"]
+
+# --- import-linter: package boundaries (ADR-0003, ADR-0005) --------------------
+[tool.importlinter]
+root_packages = [
+  "pecten_api",
+  "pecten_contracts",
+  "pecten_ingest",
+  "pecten_pipelines",
+  "pecten_sim",
+  "pecten_survey",
+]
+
+[[tool.importlinter.contracts]]
+name = "Contracts are a leaf: they import no other Pecten package"
+type = "forbidden"
+source_modules = ["pecten_contracts"]
+forbidden_modules = ["pecten_api", "pecten_ingest", "pecten_pipelines", "pecten_sim", "pecten_survey"]
+
+[[tool.importlinter.contracts]]
+name = "The platform never imports the simulator or its ground truth"
+type = "forbidden"
+source_modules = ["pecten_api", "pecten_ingest", "pecten_pipelines", "pecten_survey"]
+forbidden_modules = ["pecten_sim"]
+
+[[tool.importlinter.contracts]]
+name = "Libraries do not import the orchestration layer"
+type = "forbidden"
+source_modules = ["pecten_api", "pecten_ingest", "pecten_sim", "pecten_survey"]
+forbidden_modules = ["pecten_pipelines"]
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.170.14",
+    "import-linter>=2.15",
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.3",
+]

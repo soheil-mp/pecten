@@ -1,0 +1,22 @@
+[project]
+name = "pecten-sim"
+version = "0.0.0"
+description = "Physics-based sensor twin: renders thermal, visible-light, stereo and drone imagery with ground truth."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Soheil Mohammadpour" }]
+requires-python = ">=3.14"
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Programming Language :: Python :: 3.14",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/soheil-mp/pecten"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14"]
+build-backend = "uv_build"

@@ -1,7 +1,7 @@
 # Roadmap
 
 > **Status (2026-11-02):** planning is complete and the engineering foundations (M0) are being
-> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.4**.
+> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.5**.
 
 Pecten is built in nine phases and 24 milestones. A thin end-to-end slice comes first (M1), and
 every later milestone deepens one stage of that slice, so the system works from early on and gets
@@ -50,8 +50,8 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 14 h (M0.1, M0.2, M0.3). **Open:** 1,053 h. With 15 % contingency that is about
-1,210 hours: roughly 11 months at 25 hours a week, before the stretch goals.
+**Done:** 18 h (M0.1, M0.2, M0.3, M0.4). **Open:** 1,049 h. With 15 % contingency that is about
+1,205 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
 
@@ -162,7 +162,7 @@ released automatically.
   `pecten-vision`, `pecten-edge`, `pecten-gateway`, `pecten-proto` and `pecten-py`; workspace
   lints (Clippy pedantic with documented exceptions, `unsafe_code = "forbid"` outside
   `pecten-py`); rustfmt settings; cargo-nextest and cargo-llvm-cov.
-- [ ] **M0.4** (4 h) uv workspace: Python 3.14 pin and `uv.lock`; packages `pecten-sim`,
+- [x] **M0.4** (4 h) uv workspace: Python 3.14 pin and `uv.lock`; packages `pecten-sim`,
   `pecten-ingest`, `pecten-pipelines`, `pecten-survey`, `pecten-api` and `pecten-contracts`;
   Ruff, `mypy --strict`, pytest with Hypothesis, branch coverage failing under 85 %, and
   import-linter contracts.
@@ -825,4 +825,4 @@ alone. **Release v1.0.0.**
 | :-- | :-- |
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
-| 2026-11-02 | Built M0.3. |
+| 2026-11-02 | Built M0.3, M0.4. |
