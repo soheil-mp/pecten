@@ -8,8 +8,8 @@ analysis-ready, standards-based datasets.
 
 It is named after the *pecten oculi*, the comb-shaped structure found in every bird's eye.
 
-> **Status:** planning is complete and building starts with the walking skeleton. Nothing is
-> runnable yet. See [Status and plans](#status-and-plans).
+> **Status:** planning is complete and the engineering foundations are being built. The product
+> is not runnable yet. See [Status and plans](#status-and-plans).
 
 ## What makes it different
 
@@ -56,21 +56,23 @@ Why each was chosen, with versions checked on 2 November 2026:
 
 ## How to run it
 
-There is no runnable code yet. What works on a fresh clone today:
+The product is not runnable yet; the development workspace is. On a fresh clone:
 
 ```sh
 git clone https://github.com/soheil-mp/pecten.git
 cd pecten
-pre-commit install --hook-type pre-commit --hook-type commit-msg
-pre-commit run --all-files
+just setup   # uv workspace, Git hooks, Rust crates, and pinned CLI tools if mise is installed
+just check   # linters, strict type checks and all tests, the same as CI
 ```
 
-Requirements: Git and [pre-commit](https://pre-commit.com/). The hooks check for secrets
-(gitleaks), spelling, Markdown style and commit-message format.
+Requirements: Git, [uv](https://docs.astral.sh/uv/), [rustup](https://rustup.rs/) and
+[just](https://just.systems/). rustup installs the pinned Rust toolchain from
+`rust-toolchain.toml` and uv installs Python 3.14 when needed.
+[mise](https://mise.jdx.dev/) is optional and installs the other pinned tools from `mise.toml`.
+A devcontainer with everything preinstalled is in `.devcontainer/`.
 
-Once the walking skeleton (milestone M1) lands, the full local stack will start with
-`just up core` and an end-to-end test with `just e2e`, using Docker Compose and the toolchain
-pinned in `mise.toml`.
+Run `just` to list every recipe. Once the walking skeleton (milestone M1) lands, `just up core`
+will start the local stack with Docker Compose and `just e2e` will run the end-to-end test.
 
 ## Documentation
 

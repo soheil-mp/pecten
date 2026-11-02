@@ -1,7 +1,7 @@
 # Roadmap
 
 > **Status (2026-11-02):** planning is complete and the engineering foundations (M0) are being
-> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.5**.
+> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.6**.
 
 Pecten is built in nine phases and 24 milestones. A thin end-to-end slice comes first (M1), and
 every later milestone deepens one stage of that slice, so the system works from early on and gets
@@ -50,7 +50,7 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 18 h (M0.1, M0.2, M0.3, M0.4). **Open:** 1,049 h. With 15 % contingency that is about
+**Done:** 21 h (M0.1, M0.2, M0.3, M0.4, M0.5). **Open:** 1,046 h. With 15 % contingency that is about
 1,205 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
@@ -166,7 +166,7 @@ released automatically.
   `pecten-ingest`, `pecten-pipelines`, `pecten-survey`, `pecten-api` and `pecten-contracts`;
   Ruff, `mypy --strict`, pytest with Hypothesis, branch coverage failing under 85 %, and
   import-linter contracts.
-- [ ] **M0.5** (3 h) Tool pinning and tasks: `mise.toml` (just, buf, kubectl, Helm, k3d, kind,
+- [x] **M0.5** (3 h) Tool pinning and tasks: `mise.toml` (just, buf, kubectl, Helm, k3d, kind,
   OpenTofu, Node, pnpm); `justfile` with `setup`, `fmt`, `lint`, `typecheck`, `test`, `bench`,
   `docs`, `up`, `down` and `e2e`; a devcontainer with the same versions.
 - [ ] **M0.6** (2 h) Code hooks in pre-commit: Ruff, mypy, rustfmt, Clippy, `buf lint`,
@@ -825,4 +825,4 @@ alone. **Release v1.0.0.**
 | :-- | :-- |
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
-| 2026-11-02 | Built M0.3, M0.4. |
+| 2026-11-02 | Built M0.3, M0.4, M0.5. |

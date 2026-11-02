@@ -1,0 +1,33 @@
+# Pinned command-line tools. Install them with `mise install` (https://mise.jdx.dev).
+# Rust is pinned in rust-toolchain.toml and Python in .python-version; uv installs
+# Python and the Python dev tools (Ruff, mypy, pytest, pre-commit) from uv.lock.
+# Renovate keeps these versions current.
+
+[tools]
+# Task runner and Python package manager
+just = "1.59.0"
+uv = "0.13.6"
+
+# Rust test, coverage and dependency-policy tools
+"aqua:nextest-rs/nextest/cargo-nextest" = "0.9.150"
+cargo-llvm-cov = "0.9.1"
+cargo-deny = "0.20.2"
+
+# Linters used by pre-commit and CI
+actionlint = "1.7.12"
+buf = "1.75.0"
+hadolint = "2.15.1"
+lychee = "0.24.2"
+shellcheck = "0.11.0"
+taplo = "0.10.0"
+
+# Web app (from M17)
+node = "26.13.0"
+pnpm = "12.16.1"
+
+# Kubernetes and infrastructure (from M19)
+helm = "4.3.1"
+k3d = "5.9.0"
+kind = "0.33.0"
+kubectl = "1.37.2"
+opentofu = "1.13.2"
