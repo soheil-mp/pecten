@@ -104,7 +104,13 @@ root_packages = [
 name = "Contracts are a leaf: they import no other Pecten package"
 type = "forbidden"
 source_modules = ["pecten_contracts"]
-forbidden_modules = ["pecten_api", "pecten_ingest", "pecten_pipelines", "pecten_sim", "pecten_survey"]
+forbidden_modules = [
+  "pecten_api",
+  "pecten_ingest",
+  "pecten_pipelines",
+  "pecten_sim",
+  "pecten_survey",
+]
 
 [[tool.importlinter.contracts]]
 name = "The platform never imports the simulator or its ground truth"
@@ -120,11 +126,11 @@ forbidden_modules = ["pecten_pipelines"]
 
 [dependency-groups]
 dev = [
-    "hypothesis>=6.170.14",
-    "import-linter>=2.15",
-    "mypy>=2.4.1",
-    "pre-commit>=4.7.0",
-    "pytest>=9.2.0",
-    "pytest-cov>=7.1.0",
-    "ruff>=0.17.3",
+  "hypothesis>=6.170.14",
+  "import-linter>=2.15",
+  "mypy>=2.4.1",
+  "pre-commit>=4.7.0",
+  "pytest>=9.2.0",
+  "pytest-cov>=7.1.0",
+  "ruff>=0.17.3",
 ]

@@ -1,14 +1,16 @@
-# Install once per clone:
-#   pre-commit install --hook-type pre-commit --hook-type commit-msg
+# Install once per clone (or run `just setup`):
+#   uv run pre-commit install --hook-type pre-commit --hook-type commit-msg
 # Run on everything:
-#   pre-commit run --all-files
+#   just hooks
 #
-# Language hooks (Ruff, mypy, rustfmt, Clippy, buf, actionlint, hadolint and the
-# rest) are added in roadmap item M0.6, once the Rust and Python workspaces exist.
+# Hooks that need the workspace (mypy, import-linter, Cargo) run as local hooks
+# through `uv run` and `cargo`, so run `just setup` first. CI runs the same hooks;
+# the language jobs run the heavier checks again with caching.
 default_install_hook_types: [pre-commit, commit-msg]
 default_stages: [pre-commit]
 
 repos:
+  # --- Secrets and repository hygiene ------------------------------------------
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
     hooks:
@@ -21,6 +23,7 @@ repos:
         args: [--maxkb=500]
       - id: check-case-conflict
       - id: check-merge-conflict
+      - id: check-symlinks
       - id: check-yaml
         args: [--allow-multiple-documents]
       - id: check-toml
@@ -36,14 +39,100 @@ repos:
     hooks:
       - id: codespell
         args: ["--ignore-words-list=ser,crate,ue,te,tung,vas"]
-
-  - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.24.0
-    hooks:
-      - id: markdownlint-cli2
+        exclude: (\.lock|^uv\.lock|^Cargo\.lock)$
 
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v4.5.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
+
+  # --- Python ------------------------------------------------------------------
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.3
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.13.6
+    hooks:
+      - id: uv-lock
+
+  # --- Documents and configuration ---------------------------------------------
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.24.0
+    hooks:
+      - id: markdownlint-cli2
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        args: [--strict]
+
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.39.0
+    hooks:
+      - id: check-github-workflows
+      - id: check-github-actions
+      - id: check-github-issue-forms
+      - id: check-renovate
+      - id: check-citation-file-format
+
+  # --- CI, containers and shell ------------------------------------------------
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+
+  - repo: https://github.com/AleksaC/hadolint-py
+    rev: v2.15.1
+    hooks:
+      - id: hadolint
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+
+  # --- Protobuf ----------------------------------------------------------------
+  - repo: https://github.com/bufbuild/buf
+    rev: v1.75.0
+    hooks:
+      - id: buf-lint
+      - id: buf-format
+
+  # --- Workspace hooks ---------------------------------------------------------
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy (strict)
+        entry: uv run --frozen mypy
+        language: system
+        types: [python]
+        pass_filenames: false
+      - id: import-linter
+        name: import-linter (package boundaries)
+        entry: uv run --frozen lint-imports
+        language: system
+        types: [python]
+        pass_filenames: false
+      - id: cargo-fmt
+        name: rustfmt
+        entry: cargo fmt --all -- --check
+        language: system
+        types: [rust]
+        pass_filenames: false
+      - id: cargo-clippy
+        name: Clippy (warnings are errors)
+        entry: cargo clippy --workspace --all-targets --locked -- -D warnings
+        language: system
+        files: (\.rs|Cargo\.toml|Cargo\.lock)$
+        pass_filenames: false

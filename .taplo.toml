@@ -1,0 +1,10 @@
+# TOML formatting for Cargo, pyproject, mise and tool configuration files.
+exclude = ["target/**", ".venv/**", "**/node_modules/**", "uv.lock", "Cargo.lock"]
+
+[formatting]
+align_entries = false
+array_auto_collapse = true
+array_auto_expand = true
+column_width = 100
+indent_string = "  "
+reorder_keys = false
