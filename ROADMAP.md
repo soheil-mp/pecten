@@ -9,9 +9,9 @@ better with each step.
 
 ## How to read this roadmap
 
-- **IDs** are `M<milestone>.<item>`. Every milestone exists on GitHub, and the open M0 and M1
-  items are issues [#1–#22](https://github.com/soheil-mp/pecten/issues) titled by ID. M0.13
-  automates the rest; this file stays the source of truth.
+- **IDs** are `M<milestone>.<item>` (stretch goals `S<n>`). Every milestone exists on GitHub
+  and every open item is an [issue](https://github.com/soheil-mp/pecten/issues) titled by its ID.
+  `just sync-issues --apply` keeps them in step with this file, which stays the source of truth.
 - **Estimates** are hours of focused work, including tests and documentation for that item.
 - **`[x]`** marks items merged to `main`. A milestone closes only when its exit criteria hold.
 - Background for every decision: [domain research](docs/research/01-domain.md),
@@ -50,7 +50,7 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 40 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11). **Open:** 1,027 h. With 15 % contingency that is about
+**Done:** 42 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11, M0.13). **Open:** 1,025 h. With 15 % contingency that is about
 1,180 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
@@ -190,7 +190,7 @@ released automatically.
   description, topics, labels, merge-commit-only merging, secret scanning with push protection,
   private vulnerability reporting, and rulesets (no force-push or deletion; pull requests must
   pass `ci-passed`). State stays local and ignored by Git.
-- [ ] **M0.13** (2 h) `tools/sync_roadmap_issues.py`: idempotent creation of GitHub milestones,
+- [x] **M0.13** (2 h) `tools/sync_roadmap_issues.py`: idempotent creation of GitHub milestones,
   labels and one issue per open roadmap item; closes issues whose items are ticked here.
 
 **Exit criteria:** CI is green on `main`; the docs site is live; `just setup && just test` works
@@ -825,4 +825,4 @@ alone. **Release v1.0.0.**
 | :-- | :-- |
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
-| 2026-11-02 | Built M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11. |
+| 2026-11-02 | Built M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11, M0.13. |

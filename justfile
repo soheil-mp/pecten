@@ -89,6 +89,10 @@ e2e:
     @test -f tests/e2e/test_walking_skeleton.py || { echo "The end-to-end test arrives with roadmap item M1.10." >&2; exit 1; }
     uv run pytest tests/e2e
 
+# Mirror ROADMAP.md onto GitHub milestones and issues (dry run; pass --apply to change).
+sync-issues *args:
+    uv run python tools/sync_roadmap_issues.py {{args}}
+
 # Remove build outputs and caches.
 clean:
     cargo clean
