@@ -1,7 +1,7 @@
 # Roadmap
 
 > **Status (2026-11-02):** planning is complete and the engineering foundations (M0) are being
-> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.9**.
+> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.10**.
 
 Pecten is built in nine phases and 24 milestones. A thin end-to-end slice comes first (M1), and
 every later milestone deepens one stage of that slice, so the system works from early on and gets
@@ -50,7 +50,7 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 32 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8). **Open:** 1,035 h. With 15 % contingency that is about
+**Done:** 34 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9). **Open:** 1,033 h. With 15 % contingency that is about
 1,190 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
@@ -178,7 +178,7 @@ released automatically.
   managers for `mise.toml`); `tools/dependency_policy.py` (licence allowlist and machine-learning
   deny list for Python and JavaScript lock files); `deny.toml` for cargo-deny (licences, bans,
   sources); run in CI, pre-commit and `just lint`.
-- [ ] **M0.9** (2 h) Community files: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` (Contributor
+- [x] **M0.9** (2 h) Community files: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` (Contributor
   Covenant 2.1), `CODEOWNERS`, issue forms (bug, feature, research spike) and a pull-request
   template that asks about ADRs, contracts and privacy.
 - [ ] **M0.10** (3 h) Release automation: release-please in manifest mode for crates, packages
@@ -825,4 +825,4 @@ alone. **Release v1.0.0.**
 | :-- | :-- |
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
-| 2026-11-02 | Built M0.3, M0.4, M0.5, M0.6, M0.7, M0.8. |
+| 2026-11-02 | Built M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9. |

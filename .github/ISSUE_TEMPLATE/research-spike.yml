@@ -1,0 +1,35 @@
+name: Research spike
+description: A time-boxed investigation that ends in a written answer, not production code.
+labels: [type:spike]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: The question the spike must answer.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Why it matters
+      description: Which decision, roadmap item or ADR depends on the answer.
+    validations:
+      required: true
+  - type: input
+    id: timebox
+    attributes:
+      label: Time box (hours)
+      placeholder: "4"
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: The written output, for example a section in docs/research/ or a new ADR.
+      value: |
+        - [ ] Findings written down with sources and the date they were checked.
+        - [ ] The affected roadmap items or ADRs are updated.
+    validations:
+      required: true
