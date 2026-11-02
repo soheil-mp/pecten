@@ -1,0 +1,17 @@
+[package]
+name = "pecten-gateway"
+description = "Gateway: validates edge events from MQTT and produces them to Kafka."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+pecten-vision.workspace = true
+pecten-proto.workspace = true
+
+[lints]
+workspace = true

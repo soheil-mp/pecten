@@ -1,7 +1,7 @@
 # Roadmap
 
-> **Status (2026-11-02):** planning is complete. Research, architecture and sixteen ADRs are in
-> [`docs/`](docs/). No product code exists yet. The next item is **M0.3**.
+> **Status (2026-11-02):** planning is complete and the engineering foundations (M0) are being
+> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.4**.
 
 Pecten is built in nine phases and 24 milestones. A thin end-to-end slice comes first (M1), and
 every later milestone deepens one stage of that slice, so the system works from early on and gets
@@ -50,8 +50,8 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 10 h (M0.1, M0.2). **Open:** 1,057 h. With 15 % contingency that is about 1,215 hours:
-roughly eleven months at 25 hours a week, before the stretch goals.
+**Done:** 14 h (M0.1, M0.2, M0.3). **Open:** 1,053 h. With 15 % contingency that is about
+1,210 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
 
@@ -158,7 +158,7 @@ released automatically.
   Conventional Commits.
 - [x] **M0.2** (8 h) Planning: domain research, data sources verified against the live services,
   technology landscape, sixteen ADRs, architecture and this roadmap.
-- [ ] **M0.3** (4 h) Cargo workspace: `rust-toolchain.toml` (Rust 1.99, edition 2024); crates
+- [x] **M0.3** (4 h) Cargo workspace: `rust-toolchain.toml` (Rust 1.99, edition 2024); crates
   `pecten-vision`, `pecten-edge`, `pecten-gateway`, `pecten-proto` and `pecten-py`; workspace
   lints (Clippy pedantic with documented exceptions, `unsafe_code = "forbid"` outside
   `pecten-py`); rustfmt settings; cargo-nextest and cargo-llvm-cov.
@@ -825,3 +825,4 @@ alone. **Release v1.0.0.**
 | :-- | :-- |
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
+| 2026-11-02 | Built M0.3. |

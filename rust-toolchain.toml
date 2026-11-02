@@ -1,0 +1,5 @@
+# Pinned Rust toolchain; rustup installs it automatically on first use.
+[toolchain]
+channel = "1.99.1"
+profile = "minimal"
+components = ["rustfmt", "clippy", "llvm-tools"]

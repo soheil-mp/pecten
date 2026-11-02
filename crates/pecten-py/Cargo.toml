@@ -1,0 +1,38 @@
+[package]
+name = "pecten-py"
+description = "Python bindings for pecten-vision, used by the simulator's verification tests."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[lib]
+name = "pecten_native"
+crate-type = ["cdylib", "rlib"]
+# The extension module links against the Python interpreter that loads it, so it
+# is built with maturin (roadmap M2.2) and checked, not test-linked, by Cargo.
+test = false
+doctest = false
+
+[dependencies]
+pecten-vision.workspace = true
+pyo3 = { workspace = true, features = ["extension-module", "abi3-py314"] }
+
+# PyO3's macros expand to `unsafe` code, so this crate cannot inherit the
+# workspace's `unsafe_code = "forbid"`. Every other lint matches the workspace.
+[lints.rust]
+unsafe_code = "allow"
+missing_docs = "warn"
+unreachable_pub = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = "allow"
+dbg_macro = "warn"
+print_stderr = "warn"
+todo = "warn"
+unwrap_used = "warn"
