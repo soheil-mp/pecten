@@ -1,0 +1,85 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    ":semanticCommits",
+    ":timezone(Europe/Amsterdam)",
+    "schedule:weekly"
+  ],
+  "labels": ["dependencies"],
+  "dependencyDashboard": true,
+  "rangeStrategy": "bump",
+  "prConcurrentLimit": 8,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on monday"]
+  },
+  "pre-commit": {
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "description": "Group GitHub Actions; their digests are pinned by config:best-practices.",
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
+    },
+    {
+      "description": "Group pre-commit hook revisions.",
+      "matchManagers": ["pre-commit"],
+      "groupName": "pre-commit hooks"
+    },
+    {
+      "description": "Group Python development tools.",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["dependency-groups"],
+      "groupName": "Python dev tools"
+    },
+    {
+      "description": "Group Rust crates.",
+      "matchManagers": ["cargo"],
+      "groupName": "Rust crates"
+    },
+    {
+      "description": "Group command-line tools pinned in mise.toml.",
+      "matchManagers": ["mise"],
+      "groupName": "CLI tools (mise)"
+    },
+    {
+      "description": "Merge patch and minor updates of development tooling automatically once CI passes.",
+      "matchManagers": ["github-actions", "pre-commit", "mise", "custom.regex"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Merge patch and minor updates of Python dev tools automatically once CI passes.",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["dependency-groups"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Major updates always need a person to review them.",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "labels": ["dependencies", "major-update"]
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Rust toolchain pinned in rust-toolchain.toml.",
+      "managerFilePatterns": ["/^rust-toolchain\\.toml$/"],
+      "matchStrings": ["channel = \"(?<currentValue>\\d+\\.\\d+\\.\\d+)\""],
+      "depNameTemplate": "rust",
+      "packageNameTemplate": "rust-lang/rust",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "description": "Container images used in workflow run steps.",
+      "managerFilePatterns": ["/^\\.github/workflows/.+\\.ya?ml$/"],
+      "matchStrings": ["(?<depName>ghcr\\.io/[a-z0-9._/-]+):(?<currentValue>v?\\d+\\.\\d+\\.\\d+)"],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}

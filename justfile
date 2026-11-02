@@ -29,6 +29,12 @@ lint:
     uv run lint-imports
     cargo fmt --all -- --check
     cargo clippy --workspace --all-targets --locked -- -D warnings
+    just deps
+
+# Check dependency licences and the machine-learning deny list.
+deps:
+    uv run python tools/dependency_policy.py
+    if command -v cargo-deny >/dev/null; then cargo deny check licenses bans sources; else echo "cargo-deny not found (install with mise); CI runs it"; fi
 
 # Type-check the Python packages (mypy, strict).
 typecheck:

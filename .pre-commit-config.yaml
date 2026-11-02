@@ -124,6 +124,12 @@ repos:
         language: system
         types: [python]
         pass_filenames: false
+      - id: dependency-policy
+        name: dependency policy (licences, machine-learning deny list)
+        entry: uv run --frozen python tools/dependency_policy.py
+        language: system
+        files: (uv\.lock|pnpm-lock\.yaml|tools/dependency-policy\.toml|tools/dependency_policy\.py)$
+        pass_filenames: false
       - id: cargo-fmt
         name: rustfmt
         entry: cargo fmt --all -- --check

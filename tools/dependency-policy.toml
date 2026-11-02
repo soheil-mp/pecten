@@ -1,0 +1,55 @@
+# Dependency policy for Python and JavaScript packages, enforced by
+# tools/dependency_policy.py. Rust crates use deny.toml with the same lists.
+# Background: docs/research/03-technology-landscape.md §4 and ADR-0002.
+
+[licences]
+# SPDX identifiers that linked or vendored dependencies may use.
+allow = [
+  "0BSD",
+  "Apache-2.0",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "BSL-1.0",
+  "CC0-1.0",
+  "ISC",
+  "MIT",
+  "MIT-0",
+  "MPL-2.0",
+  "PSF-2.0",
+  "Unicode-3.0",
+  "Unlicense",
+  "Zlib",
+]
+
+[deny]
+# Machine-learning, model-inference and model-API packages. Shell-style
+# wildcards are allowed; names are compared after PEP 503 normalisation.
+python = [
+  "anthropic",
+  "birdnet*",
+  "catboost",
+  "google-generativeai",
+  "jax",
+  "keras",
+  "langchain*",
+  "lightgbm",
+  "llama*",
+  "mediapipe",
+  "ollama",
+  "onnx",
+  "onnxruntime*",
+  "openai",
+  "opencv-*",
+  "scikit-learn",
+  "sentence-transformers",
+  "tensorflow*",
+  "torch*",
+  "transformers",
+  "ultralytics",
+  "xgboost",
+]
+javascript = ["@huggingface/*", "@tensorflow/*", "@xenova/transformers", "ml5", "onnxruntime-web"]
+
+# Reviewed exceptions for packages whose metadata does not state an SPDX
+# licence. Each entry needs the licence found in the package and a reason.
+[overrides.python]

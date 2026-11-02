@@ -1,0 +1,55 @@
+# cargo-deny policy for Rust dependencies: licences, banned crates and sources.
+# Run with `cargo deny check licenses bans sources` (CI, `just lint`).
+# The licence list mirrors docs/research/03-technology-landscape.md §4.
+
+[graph]
+all-features = true
+
+[licenses]
+allow = [
+  "0BSD",
+  "Apache-2.0",
+  "Apache-2.0 WITH LLVM-exception",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "BSL-1.0",
+  "CC0-1.0",
+  "ISC",
+  "MIT",
+  "MPL-2.0",
+  "Unicode-3.0",
+  "Unlicense",
+  "Zlib",
+]
+confidence-threshold = 0.93
+
+[licenses.private]
+# Workspace crates are not published; their licence is the repository's MIT.
+ignore = true
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+allow-wildcard-paths = true
+highlight = "all"
+# Machine-learning and model-inference crates are out of scope (ADR-0002).
+deny = [
+  { crate = "burn", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "candle-core", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "candle-nn", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "candle-transformers", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "linfa", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "onnxruntime", reason = "model inference is out of scope (ADR-0002)" },
+  { crate = "opencv", reason = "bundles a neural-network inference module (ADR-0002)" },
+  { crate = "ort", reason = "model inference is out of scope (ADR-0002)" },
+  { crate = "rust-bert", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "smartcore", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "tch", reason = "machine learning is out of scope (ADR-0002)" },
+  { crate = "tract-core", reason = "model inference is out of scope (ADR-0002)" },
+  { crate = "tract-onnx", reason = "model inference is out of scope (ADR-0002)" },
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

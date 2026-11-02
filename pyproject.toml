@@ -43,6 +43,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
+"tools/*.py" = ["INP001"] # repository scripts, not a package
 "**/tests/**" = [
   "D",       # test names describe the behaviour
   "INP001",  # test directories are not packages
@@ -60,20 +61,24 @@ docstring-code-format = true
 [tool.mypy]
 python_version = "3.14"
 strict = true
-files = ["packages"]
+files = ["packages", "tools"]
+mypy_path = "tools"
 warn_unreachable = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
 # --- pytest and coverage -------------------------------------------------------
 [tool.pytest.ini_options]
 minversion = "9.0"
-testpaths = ["packages"]
+testpaths = ["packages", "tools/tests"]
+pythonpath = ["tools"]
 addopts = ["-ra", "--strict-markers", "--strict-config", "--import-mode=importlib"]
 xfail_strict = true
 filterwarnings = ["error"]
 
 [tool.coverage.run]
 branch = true
+source = ["tools"]
+omit = ["*/tests/*"]
 source_pkgs = [
   "pecten_api",
   "pecten_contracts",
