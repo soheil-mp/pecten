@@ -9,8 +9,9 @@ better with each step.
 
 ## How to read this roadmap
 
-- **IDs** are `M<milestone>.<item>`. Each open item becomes one GitHub issue (M0.13 automates
-  this); this file stays the source of truth.
+- **IDs** are `M<milestone>.<item>`. Every milestone exists on GitHub, and the open M0 and M1
+  items are issues [#1–#22](https://github.com/soheil-mp/pecten/issues) titled by ID. M0.13
+  automates the rest; this file stays the source of truth.
 - **Estimates** are hours of focused work, including tests and documentation for that item.
 - **`[x]`** marks items merged to `main`. A milestone closes only when its exit criteria hold.
 - Background for every decision: [domain research](docs/research/01-domain.md),
@@ -823,3 +824,4 @@ alone. **Release v1.0.0.**
 | Date | Change |
 | :-- | :-- |
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
+| 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
