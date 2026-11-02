@@ -1,7 +1,7 @@
 # Architecture
 
 > Target architecture as planned on 2 November 2026. Parts are built milestone by milestone
-> ([ROADMAP.md](../ROADMAP.md)); this page is updated when a decision changes.
+> ([ROADMAP.md](https://github.com/soheil-mp/pecten/blob/main/ROADMAP.md)); this page is updated when a decision changes.
 
 ## 1. Overview
 

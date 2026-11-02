@@ -76,6 +76,8 @@ will start the local stack with Docker Compose and `just e2e` will run the end-t
 
 ## Documentation
 
+The documentation site is at <https://soheil-mp.github.io/pecten/>. Its main pages:
+
 - [Domain research](docs/research/01-domain.md): camera physics, bird flight, metrics, methods,
   privacy and law.
 - [Data sources](docs/research/02-data-sources.md): what real data is used, verified live, and how

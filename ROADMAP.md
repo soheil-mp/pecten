@@ -1,7 +1,7 @@
 # Roadmap
 
 > **Status (2026-11-02):** planning is complete and the engineering foundations (M0) are being
-> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.11**.
+> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.12**.
 
 Pecten is built in nine phases and 24 milestones. A thin end-to-end slice comes first (M1), and
 every later milestone deepens one stage of that slice, so the system works from early on and gets
@@ -50,8 +50,8 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 37 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10). **Open:** 1,030 h. With 15 % contingency that is about
-1,185 hours: roughly 11 months at 25 hours a week, before the stretch goals.
+**Done:** 40 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11). **Open:** 1,027 h. With 15 % contingency that is about
+1,180 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
 
@@ -184,7 +184,7 @@ released automatically.
 - [x] **M0.10** (3 h) Release automation: release-please in manifest mode for crates, packages
   and the web app; `CHANGELOG.md`; tags `vX.Y.Z`; `CITATION.cff`; a versioning policy for APIs,
   schemas and contracts.
-- [ ] **M0.11** (3 h) Documentation site with Zensical: Diátaxis sections, research and ADRs
+- [x] **M0.11** (3 h) Documentation site with Zensical: Diátaxis sections, research and ADRs
   included, Mermaid enabled, deployed to GitHub Pages, lychee link checking in CI.
 - [ ] **M0.12** (3 h) Repository settings as code with OpenTofu (`integrations/github`):
   description, topics, labels, merge-commit-only merging, secret scanning with push protection,
@@ -825,4 +825,4 @@ alone. **Release v1.0.0.**
 | :-- | :-- |
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
-| 2026-11-02 | Built M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10. |
+| 2026-11-02 | Built M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11. |

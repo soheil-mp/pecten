@@ -1,0 +1,124 @@
+# Documentation site, built with Zensical (https://zensical.org).
+# Build: `just docs-build`; preview: `just docs`. Deployed to GitHub Pages by
+# .github/workflows/docs.yml. Pages follow the Diátaxis structure.
+
+[project]
+site_name = "Pecten"
+site_description = "Deterministic, multi-modal camera monitoring of birds: sensor twin, edge, data platform."
+site_author = "Soheil Mohammadpour"
+site_url = "https://soheil-mp.github.io/pecten/"
+repo_url = "https://github.com/soheil-mp/pecten"
+repo_name = "soheil-mp/pecten"
+edit_uri = "edit/main/docs/"
+copyright = "Copyright &copy; 2026 Soheil Mohammadpour. MIT licence."
+docs_dir = "docs"
+site_dir = "site"
+nav = [
+  { "Home" = "index.md" },
+  { "Tutorials" = [
+    "tutorials/index.md",
+  ] },
+  { "How-to guides" = [
+    "how-to/index.md",
+    "how-to/development-setup.md",
+  ] },
+  { "Reference" = [
+    "reference/index.md",
+    "reference/versioning.md",
+  ] },
+  { "Explanation" = [
+    "architecture.md",
+    { "Research" = [
+      "research/01-domain.md",
+      "research/02-data-sources.md",
+      "research/03-technology-landscape.md",
+    ] },
+    { "Decisions (ADRs)" = [
+      "adr/README.md",
+      { "ADR-0001: Record architecture decisions" = "adr/0001-record-architecture-decisions.md" },
+      { "ADR-0002: Deterministic, explainable perception with no machine learning" = "adr/0002-deterministic-explainable-perception.md" },
+      { "ADR-0003: A physics-based sensor twin as the primary data source" = "adr/0003-physics-based-sensor-twin.md" },
+      { "ADR-0004: Privacy by design for cameras" = "adr/0004-privacy-by-design-for-cameras.md" },
+      { "ADR-0005: Rust on the edge, Python for the simulator and platform, one monorepo" = "adr/0005-rust-edge-python-platform.md" },
+      { "ADR-0006: MQTT 5 with CloudEvents and Protobuf at the edge, Kafka as the platform backbone" = "adr/0006-mqtt-cloudevents-protobuf-kafka.md" },
+      { "ADR-0007: Stream processing with RisingWave" = "adr/0007-stream-processing-risingwave.md" },
+      { "ADR-0008: An Apache Iceberg lakehouse with Lakekeeper and S3-compatible storage" = "adr/0008-iceberg-lakehouse-lakekeeper.md" },
+      { "ADR-0009: Orchestration with Apache Airflow 3" = "adr/0009-orchestration-airflow-3.md" },
+      { "ADR-0010: Transformations with SQLMesh on Trino, unit-tested on DuckDB" = "adr/0010-transformations-sqlmesh-trino.md" },
+      { "ADR-0011: Contracts first: Protobuf, a schema registry and ODCS data contracts" = "adr/0011-contracts-first.md" },
+      { "ADR-0012: Public-source ingestion with small, idempotent connectors on PyIceberg" = "adr/0012-ingestion-connectors-pyiceberg.md" },
+      { "ADR-0013: Small data by design" = "adr/0013-small-data-by-design.md" },
+      { "ADR-0014: Kubernetes with GitOps, and a signed software supply chain" = "adr/0014-gitops-kubernetes-supply-chain.md" },
+      { "ADR-0015: Observability with OpenTelemetry, and data treated as a monitored service" = "adr/0015-observability-opentelemetry.md" },
+      { "ADR-0016: Standards-based outputs" = "adr/0016-standards-based-outputs.md" },
+    ] },
+  ] },
+  { "Roadmap" = "https://github.com/soheil-mp/pecten/blob/main/ROADMAP.md" },
+]
+
+[project.theme]
+language = "en"
+features = [
+  "content.action.edit",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.tabs",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "teal"
+accent = "deep-orange"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "teal"
+accent = "deep-orange"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+tables = {}
+toc.permalink = true
+pymdownx.arithmatex.generic = true
+pymdownx.betterem = {}
+pymdownx.details = {}
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}

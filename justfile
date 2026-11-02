@@ -11,7 +11,7 @@ default:
 
 # Install dependencies, Git hooks and (when mise is available) pinned CLI tools.
 setup:
-    uv sync --all-packages --locked
+    uv sync --all-packages --all-groups --locked
     uv run pre-commit install --hook-type pre-commit --hook-type commit-msg
     cargo fetch --locked
     if command -v mise >/dev/null; then mise install; else echo "mise not found; install it from https://mise.jdx.dev for the pinned CLI tools in mise.toml"; fi
@@ -66,9 +66,13 @@ check: lint typecheck test
 hooks:
     uv run pre-commit run --all-files
 
-# Build and serve the documentation site locally.
+# Preview the documentation site at http://localhost:8000 with live reload.
 docs:
-    @echo "The documentation site arrives with roadmap item M0.11." >&2; exit 1
+    uv run --group docs zensical serve
+
+# Build the documentation site into site/ (warnings fail the build).
+docs-build:
+    uv run --group docs zensical build --clean --strict
 
 # Start the local stack with a Compose profile (core, stream, batch, obs, full).
 up profile="core":

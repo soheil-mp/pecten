@@ -149,7 +149,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
       - name: Install the workspace
-        run: uv sync --all-packages
+        run: uv sync --all-packages --all-groups
       - name: Ruff
         run: |
           uv run ruff format --check .
