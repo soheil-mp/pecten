@@ -1,0 +1,87 @@
+# --- Secrets and local configuration -------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.csr
+*.age
+!**/*.sops.*
+.netrc
+secrets/
+
+# --- Rust -----------------------------------------------------------------
+target/
+**/*.profraw
+lcov.info
+
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.benchmarks/
+dist/
+build/
+site/
+
+# --- Node / web -----------------------------------------------------------
+node_modules/
+.pnpm-store/
+.svelte-kit/
+web/build/
+playwright-report/
+test-results/
+
+# --- Data: never commit data; only tiny synthetic fixtures under tests/ ---
+data/
+!data/.gitkeep
+*.parquet
+*.arrow
+*.arrows
+*.feather
+*.duckdb
+*.duckdb.wal
+*.zarr/
+*.gpkg
+*.tif
+*.tiff
+*.mp4
+*.mkv
+*.raw
+!**/tests/fixtures/**
+
+# --- SQLMesh, Airflow -----------------------------------------------------
+transform/.cache/
+transform/logs/
+airflow_home/
+logs/
+
+# --- Infrastructure -------------------------------------------------------
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+kubeconfig*
+.kube/
+
+# --- Editors and OS -------------------------------------------------------
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- Local assistant files ------------------------------------------------
+CLAUDE.local.md
