@@ -89,8 +89,13 @@ The documentation site is at <https://soheil-mp.github.io/pecten/>. Its main pag
 ## Status and plans
 
 Planning is done: research, data sources checked against the live services, sixteen ADRs and the
-target architecture. The work ahead, 24 milestones and about 1,060 hours from the walking
-skeleton to 1.0, is in [ROADMAP.md](ROADMAP.md). The next item is M0.3, the Rust workspace.
+target architecture. The engineering foundations are in place: Rust and Python workspaces with
+strict linting and typing, pre-commit hooks, CI on amd64 and arm64, a dependency licence and
+machine-learning policy, release automation and the [documentation site](https://soheil-mp.github.io/pecten/).
+
+The work ahead, 24 milestones and about 1,025 open hours from the walking skeleton to 1.0, is in
+[ROADMAP.md](ROADMAP.md) and mirrored as [GitHub issues](https://github.com/soheil-mp/pecten/issues).
+The next item is M0.12 (repository settings as code), then the walking skeleton (M1).
 
 All data in this repository is synthetic or comes from the public, non-personal sources listed
 in the data-sources document.
