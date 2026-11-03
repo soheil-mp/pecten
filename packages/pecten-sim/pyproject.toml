@@ -12,7 +12,10 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
   "Typing :: Typed",
 ]
-dependencies = []
+dependencies = ["numpy>=2.3", "pyarrow>=26"]
+
+[project.scripts]
+pecten-sim = "pecten_sim.cli:main"
 
 [project.urls]
 Repository = "https://github.com/soheil-mp/pecten"

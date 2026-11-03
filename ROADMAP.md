@@ -50,7 +50,7 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 42 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11, M0.13). **Open:** 1,025 h. With 15 % contingency that is about
+**Done:** 47 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11, M0.13, M1.1). **Open:** 1,020 h. With 15 % contingency that is about
 1,180 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
@@ -205,7 +205,7 @@ on a fresh clone.
 **Goal:** one synthetic warm bird crossing a thermal camera's view becomes a gold-table row and an
 API response, in Docker Compose and in CI.
 
-- [ ] **M1.1** (5 h) Minimal thermal simulator: uniform sky, Gaussian NETD noise, one warm disc on
+- [x] **M1.1** (5 h) Minimal thermal simulator: uniform sky, Gaussian NETD noise, one warm disc on
   a straight line, 160 × 120 pixels at 8.7 Hz; frames as an Arrow IPC stream over TCP; ground
   truth as JSON Lines on a separate channel.
 - [ ] **M1.2** (3 h) First Protobuf schemas (`FrameHeader`, `DetectionBatch`, `TrackUpdate`,
@@ -826,3 +826,4 @@ alone. **Release v1.0.0.**
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
 | 2026-11-02 | Engineering foundations (M0.3–M0.11, M0.13): Cargo and uv workspaces, just and mise, pre-commit, CI on amd64 and arm64, dependency policy, community files, release-please, the docs site on GitHub Pages and the roadmap-to-issues sync (192 open issues). |
+| 2026-11-03 | M1.1: minimal thermal simulator (warm disc, NETD noise, Arrow IPC frame stream over TCP, ground truth as JSON Lines). |

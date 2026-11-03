@@ -66,6 +66,11 @@ mypy_path = "tools"
 warn_unreachable = true
 enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
 
+[[tool.mypy.overrides]]
+# pyarrow ships no type information; its values are treated as Any.
+module = ["pyarrow", "pyarrow.*"]
+ignore_missing_imports = true
+
 # --- pytest and coverage -------------------------------------------------------
 [tool.pytest.ini_options]
 minversion = "9.0"
