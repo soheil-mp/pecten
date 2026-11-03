@@ -1,7 +1,9 @@
 # Roadmap
 
-> **Status (2026-11-02):** planning is complete and the engineering foundations (M0) are being
-> built. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next item is **M0.12**.
+> **Status (2026-11-03):** the engineering foundations (M0) are done except M0.12. The thin slice
+> (M1) has started: a thermal simulator streams frames to an edge runtime that detects and tracks
+> a warm target. Research, architecture and sixteen ADRs are in [`docs/`](docs/). The next items
+> are **M1.2** (schemas) and the MQTT half of **M1.3**.
 
 Pecten is built in nine phases and 24 milestones. A thin end-to-end slice comes first (M1), and
 every later milestone deepens one stage of that slice, so the system works from early on and gets
@@ -826,4 +828,4 @@ alone. **Release v1.0.0.**
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
 | 2026-11-02 | Engineering foundations (M0.3–M0.11, M0.13): Cargo and uv workspaces, just and mise, pre-commit, CI on amd64 and arm64, dependency policy, community files, release-please, the docs site on GitHub Pages and the roadmap-to-issues sync (192 open issues). |
-| 2026-11-03 | M1.1: minimal thermal simulator (warm disc, NETD noise, Arrow IPC frame stream over TCP, ground truth as JSON Lines). Toward M1.3 in `pecten-vision`: fixed threshold and two-pass connected-component labelling with weighted centroids, and a greedy nearest-neighbour tracker with least-squares velocity. |
+| 2026-11-03 | M1.1: minimal thermal simulator (warm disc, NETD noise, Arrow IPC frame stream over TCP, ground truth as JSON Lines). Toward M1.3 in `pecten-vision`: fixed threshold and two-pass connected-component labelling with weighted centroids, and a greedy nearest-neighbour tracker with least-squares velocity; `pecten-edge` reads the Arrow frame stream from a file or TCP, detects at five NETD over the median sky and writes track updates as JSON Lines (CloudEvents over MQTT still to come). |

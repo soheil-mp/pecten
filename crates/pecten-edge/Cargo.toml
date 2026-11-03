@@ -12,6 +12,9 @@ publish.workspace = true
 [dependencies]
 pecten-vision.workspace = true
 pecten-proto.workspace = true
+arrow-ipc = { version = "60.1.0", default-features = false }
+arrow-array = { version = "60.1.0", default-features = false }
+arrow-schema = { version = "60.1.0", default-features = false }
 
 [lints]
 workspace = true
