@@ -826,4 +826,4 @@ alone. **Release v1.0.0.**
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
 | 2026-11-02 | Engineering foundations (M0.3–M0.11, M0.13): Cargo and uv workspaces, just and mise, pre-commit, CI on amd64 and arm64, dependency policy, community files, release-please, the docs site on GitHub Pages and the roadmap-to-issues sync (192 open issues). |
-| 2026-11-03 | M1.1: minimal thermal simulator (warm disc, NETD noise, Arrow IPC frame stream over TCP, ground truth as JSON Lines). |
+| 2026-11-03 | M1.1: minimal thermal simulator (warm disc, NETD noise, Arrow IPC frame stream over TCP, ground truth as JSON Lines). Toward M1.3 in `pecten-vision`: fixed threshold and two-pass connected-component labelling with weighted centroids. |
