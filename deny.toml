@@ -47,6 +47,12 @@ deny = [
   { crate = "tch", reason = "machine learning is out of scope (ADR-0002)" },
   { crate = "tract-core", reason = "model inference is out of scope (ADR-0002)" },
   { crate = "tract-onnx", reason = "model inference is out of scope (ADR-0002)" },
+  # Boundary (ADR-0003, ROADMAP M1.11): only the bindings crate may link Python, so the edge and
+  # gateway never embed the Python simulator or its ground truth. That no workspace crate depends
+  # on the bindings is checked by tools/crate_boundaries.py.
+  { crate = "pyo3", wrappers = [
+    "pecten-py",
+  ], reason = "only the bindings crate may link Python (ADR-0003)" },
 ]
 
 [sources]

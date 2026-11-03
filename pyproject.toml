@@ -128,6 +128,22 @@ type = "forbidden"
 source_modules = ["pecten_api", "pecten_ingest", "pecten_pipelines", "pecten_survey"]
 forbidden_modules = ["pecten_sim"]
 
+# ADR-0003: ground truth is for tests and evaluation only. It is a leaf of the simulator, so the
+# truth channel cannot depend on (or leak into) the code that renders frames for the edge.
+[[tool.importlinter.contracts]]
+name = "Ground truth is a leaf of the simulator"
+type = "forbidden"
+source_modules = ["pecten_sim.truth"]
+forbidden_modules = [
+  "pecten_api",
+  "pecten_contracts",
+  "pecten_ingest",
+  "pecten_pipelines",
+  "pecten_sim.cli",
+  "pecten_sim.thermal",
+  "pecten_survey",
+]
+
 [[tool.importlinter.contracts]]
 name = "Libraries do not import the orchestration layer"
 type = "forbidden"

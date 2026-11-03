@@ -52,7 +52,7 @@ better with each step.
 | | **Total** | **1,067** | |
 | | [Stretch goals S1–S10](#stretch-goals) | 110 | |
 
-**Done:** 47 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11, M0.13, M1.1). **Open:** 1,020 h. With 15 % contingency that is about
+**Done:** 49 h (M0.1, M0.2, M0.3, M0.4, M0.5, M0.6, M0.7, M0.8, M0.9, M0.10, M0.11, M0.13, M1.1, M1.11). **Open:** 1,018 h. With 15 % contingency that is about
 1,180 hours: roughly 11 months at 25 hours a week, before the stretch goals.
 
 ### Indicative schedule
@@ -229,7 +229,7 @@ API response, in Docker Compose and in CI.
 - [ ] **M1.9** (3 h) FastAPI endpoint `GET /v1/tracks` reading the gold model through Trino.
 - [ ] **M1.10** (5 h) `just e2e`: start the stack, run a 60-second seeded scenario, and assert one
   track whose speed matches ground truth within 5 %; runs in CI in under 15 minutes.
-- [ ] **M1.11** (2 h) Boundaries: import-linter contracts and cargo-deny bans stop edge code from
+- [x] **M1.11** (2 h) Boundaries: import-linter contracts and cargo-deny bans stop edge code from
   depending on ground-truth modules or on the pipelines
   ([ADR-0003](docs/adr/0003-physics-based-sensor-twin.md)).
 
@@ -828,4 +828,4 @@ alone. **Release v1.0.0.**
 | 2026-11-02 | Planning done (M0.1, M0.2): research, data sources, technology selection, sixteen ADRs, architecture and this roadmap. |
 | 2026-11-02 | Repository published; secret scanning, push protection, private vulnerability reporting and a `main` ruleset enabled; 24 milestones and issues #1–#22 created. |
 | 2026-11-02 | Engineering foundations (M0.3–M0.11, M0.13): Cargo and uv workspaces, just and mise, pre-commit, CI on amd64 and arm64, dependency policy, community files, release-please, the docs site on GitHub Pages and the roadmap-to-issues sync (192 open issues). |
-| 2026-11-03 | M1.1: minimal thermal simulator (warm disc, NETD noise, Arrow IPC frame stream over TCP, ground truth as JSON Lines). Toward M1.3 in `pecten-vision`: fixed threshold and two-pass connected-component labelling with weighted centroids, and a greedy nearest-neighbour tracker with least-squares velocity; `pecten-edge` reads the Arrow frame stream from a file or TCP, detects at five NETD over the median sky and writes track updates as JSON Lines (CloudEvents over MQTT still to come). |
+| 2026-11-03 | M1.1: minimal thermal simulator (warm disc, NETD noise, Arrow IPC frame stream over TCP, ground truth as JSON Lines). Toward M1.3 in `pecten-vision`: fixed threshold and two-pass connected-component labelling with weighted centroids, and a greedy nearest-neighbour tracker with least-squares velocity; `pecten-edge` reads the Arrow frame stream from a file or TCP, detects at five NETD over the median sky and writes track updates as JSON Lines (CloudEvents over MQTT still to come). M1.11: import-linter keeps ground truth a leaf, cargo-deny lets only the bindings link PyO3, and `tools/crate_boundaries.py` stops any crate from depending on the bindings. |

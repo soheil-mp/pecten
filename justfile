@@ -34,6 +34,7 @@ lint:
 # Check dependency licences and the machine-learning deny list.
 deps:
     uv run python tools/dependency_policy.py
+    uv run python tools/crate_boundaries.py
     if command -v cargo-deny >/dev/null; then cargo deny check licenses bans sources; else echo "cargo-deny not found (install with mise); CI runs it"; fi
 
 # Type-check the Python packages (mypy, strict).
