@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.0 (2026-11-03)
+
+
+### Features
+
+* **edge:** detect and track warm targets from the Arrow frame stream ([105e4c7](https://github.com/soheil-mp/pecten/commit/105e4c7c3d000056f268d8ec891100d75d22db1e))
+* **sim:** add the minimal thermal simulator with an Arrow IPC frame stream ([673152c](https://github.com/soheil-mp/pecten/commit/673152cc42c1208836bbfb8a7535886bf845709b))
+* **vision:** add a greedy nearest-neighbour tracker ([2f9fc00](https://github.com/soheil-mp/pecten/commit/2f9fc000732c3e83714c1d9d248765d21ac3813b))
+* **vision:** add fixed thresholds and connected-component labelling ([83f9198](https://github.com/soheil-mp/pecten/commit/83f9198eacfbaac33cd459eaad17d72d59f35830))
+
+## Changelog
+
 All notable changes to Pecten are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versions follow
 [Semantic Versioning](https://semver.org/) as described in the

@@ -1,7 +1,7 @@
 # Workspace root. It is not a package itself; members live in packages/*.
 [project]
 name = "pecten-workspace"
-version = "0.0.0"
+version = "1.0.0"
 description = "Workspace root for Pecten's Python packages."
 requires-python = ">=3.14"
 dependencies = [

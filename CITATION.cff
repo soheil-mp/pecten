@@ -1,19 +1,20 @@
 cff-version: 1.2.0
 message: If you use Pecten in your work, please cite it as below.
 type: software
-title: "Pecten: deterministic, multi-modal camera monitoring of birds"
+title: 'Pecten: deterministic, multi-modal camera monitoring of birds'
 abstract: >-
-  An open platform for monitoring birds with visible-light, thermal, stereo-thermal and
-  drone cameras. Edge software turns frames into tracks, counts and flight measurements with
-  deterministic, explainable image processing, verified against a physics-based sensor twin, and
-  a data platform turns those events into standards-based datasets.
+  An open platform for monitoring birds with visible-light, thermal,
+  stereo-thermal and drone cameras. Edge software turns frames into tracks,
+  counts and flight measurements with deterministic, explainable image
+  processing, verified against a physics-based sensor twin, and a data platform
+  turns those events into standards-based datasets.
 authors:
   - family-names: Mohammadpour
     given-names: Soheil
 repository-code: https://github.com/soheil-mp/pecten
 url: https://github.com/soheil-mp/pecten
 license: MIT
-version: 0.0.0
+version: 1.0.0
 keywords:
   - bird monitoring
   - thermal imaging

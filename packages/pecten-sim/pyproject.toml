@@ -1,6 +1,6 @@
 [project]
 name = "pecten-sim"
-version = "0.0.0"
+version = "1.0.0"
 description = "Physics-based sensor twin: renders thermal, visible-light, stereo and drone imagery with ground truth."
 readme = "README.md"
 license = "MIT"

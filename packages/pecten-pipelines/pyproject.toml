@@ -1,6 +1,6 @@
 [project]
 name = "pecten-pipelines"
-version = "0.0.0"
+version = "1.0.0"
 description = "Airflow 3 DAGs and the task code they run."
 readme = "README.md"
 license = "MIT"

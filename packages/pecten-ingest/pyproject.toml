@@ -1,6 +1,6 @@
 [project]
 name = "pecten-ingest"
-version = "0.0.0"
+version = "1.0.0"
 description = "Small, idempotent connectors for public, non-personal data sources."
 readme = "README.md"
 license = "MIT"
