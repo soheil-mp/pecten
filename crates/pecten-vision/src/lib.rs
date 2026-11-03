@@ -6,6 +6,7 @@
 //! performs no I/O and contains no learned models (see ADR-0002).
 
 pub mod components;
+pub mod tracking;
 
 /// The crate version, as recorded in `Cargo.toml`.
 #[must_use]
